@@ -10,6 +10,9 @@ Este es un sistema de gestión de citas desarrollado con FastAPI y SQLite. Permi
 - Actualización del estado de las citas
 - Validación de datos con Pydantic
 - Documentación automática con Swagger UI
+- Autenticación de usuarios con JWT
+- Protección de rutas con autenticación
+- Registro y login de usuarios
 
 ## Estructura del Proyecto
 ```
@@ -55,6 +58,12 @@ http://localhost:8000/docs
 
 ## Endpoints de la API
 
+### Autenticación
+
+- `POST /auth/register` - Registrar un nuevo usuario
+- `POST /auth/login` - Iniciar sesión y obtener token JWT
+- `GET /auth/me` - Obtener información del usuario autenticado
+
 ### Citas
 
 - `POST /citas/` - Crear una nueva cita
@@ -82,6 +91,27 @@ Cada cita contiene la siguiente información:
 - `fecha_creacion`: Fecha y hora de creación del registro
 - `fecha_actualizacion`: Fecha y hora de la última actualización
 
+## Sistema de Autenticación
+
+El sistema utiliza autenticación basada en JWT (JSON Web Tokens) para proteger los endpoints de la API.
+
+### Flujo de Autenticación
+
+1. **Registro de Usuario**:
+   - Eviar una solicnitud POST a `/auth/register` con nombre, email y contraseña
+   - El sistema crea el usuario y devuelve sus datos (sin la contraseña)
+
+2. **Inicio de Sesión**:
+   - Enviar una solicitud POST a `/auth/login` con email y contraseña
+   - El sistema valida las credenciales y devuelve un token JWT
+
+3. **Acceso a Rutas Protegidas**:
+   - Incluir el token JWT en el encabezado de autorización: `Authorization: Bearer {token}`
+   - El sistema valida el token y permite el acceso si es válido
+
+### Ejemplos de Uso
+
+
 ## Acceder a la documentación
 
 La forma más sencilla de explorar la API es a través de la documentación interactiva de Swagger UI:
@@ -89,3 +119,8 @@ La forma más sencilla de explorar la API es a través de la documentación inte
 ```
 http://localhost:8000/docs
 ```
+
+Para autenticarte en la documentación interactiva:
+1. Haz clic en el botón "Authorize" en la parte superior derecha
+2. Introduce tus credenciales o el token JWT
+3. Una vez autenticado, podrás probar todos los endpoints protegidos
