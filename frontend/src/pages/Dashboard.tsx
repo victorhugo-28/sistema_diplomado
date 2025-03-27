@@ -21,6 +21,22 @@ import { citaService } from '../services/citaService';
 import { Cita } from '../types';
 import { EditarCita } from '../components/EditarCita';
 
+// Definir un tipo para los estados posibles
+type EstadoCita = 'pendiente' | 'confirmada' | 'cancelada' | 'completada';
+
+// Definir el objeto de colores con el tipo correcto
+const estadoColors: Record<EstadoCita, string> = {
+  pendiente: '#FFA726', // Naranja
+  confirmada: '#66BB6A', // Verde
+  cancelada: '#EF5350', // Rojo
+  completada: '#42A5F5' // Azul
+};
+
+// Función auxiliar con tipo correcto
+const getEstadoColor = (estado: string): string => {
+  return estadoColors[estado.toLowerCase() as EstadoCita] || '#000000';
+};
+
 export const Dashboard: React.FC = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
@@ -150,11 +166,26 @@ export const Dashboard: React.FC = () => {
                         <Select
                           value={cita.estado}
                           onChange={(e) => handleCambiarEstado(cita.id, e.target.value)}
+                          sx={{
+                            color: getEstadoColor(cita.estado),
+                            fontWeight: 'bold',
+                            '& .MuiOutlinedInput-notchedOutline': {
+                              borderColor: getEstadoColor(cita.estado)
+                            }
+                          }}
                         >
-                          <MenuItem value="pendiente">Pendiente</MenuItem>
-                          <MenuItem value="confirmada">Confirmada</MenuItem>
-                          <MenuItem value="cancelada">Cancelada</MenuItem>
-                          <MenuItem value="completada">Completada</MenuItem>
+                          <MenuItem value="pendiente" sx={{ color: estadoColors.pendiente, fontWeight: 'bold' }}>
+                            Pendiente
+                          </MenuItem>
+                          <MenuItem value="confirmada" sx={{ color: estadoColors.confirmada, fontWeight: 'bold' }}>
+                            Confirmada
+                          </MenuItem>
+                          <MenuItem value="cancelada" sx={{ color: estadoColors.cancelada, fontWeight: 'bold' }}>
+                            Cancelada
+                          </MenuItem>
+                          <MenuItem value="completada" sx={{ color: estadoColors.completada, fontWeight: 'bold' }}>
+                            Completada
+                          </MenuItem>
                         </Select>
                       </FormControl>
 
