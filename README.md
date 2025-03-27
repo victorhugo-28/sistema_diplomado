@@ -1,20 +1,82 @@
 # Sistema de Gestión de Citas
 
-## Descripción
-Este es un sistema de gestión de citas desarrollado con FastAPI y SQLite. Permite crear, consultar, actualizar y eliminar citas a través de una API RESTful.
+Sistema web para la gestión de citas médicas desarrollado con FastAPI (Backend) y React (Frontend).
 
-## Características
-- Creación, consulta, actualización y eliminación de citas (CRUD)
-- Filtrado de citas por estado y fechas
-- Consulta de citas próximas
-- Actualización del estado de las citas
-- Validación de datos con Pydantic
-- Documentación automática con Swagger UI
-- Autenticación de usuarios con JWT
-- Protección de rutas con autenticación
-- Registro y login de usuarios
+## 📋 Tabla de Contenidos
+1. [Características](#características)
+2. [Requisitos Previos](#requisitos-previos)
+3. [Instalación y Despliegue](#instalación-y-despliegue)
+4. [Estructura del Proyecto](#estructura-del-proyecto)
+5. [API Endpoints](#api-endpoints)
+6. [Modelo de Datos](#modelo-de-datos)
+7. [Tecnologías Utilizadas](#tecnologías-utilizadas)
 
-## Estructura del Proyecto
+## ✨ Características
+- Sistema de autenticación JWT
+- Gestión completa de citas (CRUD)
+- Dashboard con resumen de citas
+- Interfaz responsiva con Material UI
+- API RESTful
+- Base de datos SQLite
+- Validación de formularios
+- Manejo de estados de carga y errores
+
+## 🔧 Requisitos Previos
+
+### Backend
+- Python 3.8 o superior
+- pip (gestor de paquetes de Python)
+
+### Frontend
+- Node.js (versión 14 o superior)
+- npm (incluido con Node.js)
+
+## 🚀 Instalación y Despliegue
+
+### 1. Clonar el Repositorio
+```bash
+git clone <url-del-repositorio>
+cd sistema-gestion-citas
+```
+
+### 2. Configurar el Backend
+```bash
+# 1. Navegar al directorio del backend
+cd backend
+
+# 2. Crear y activar entorno virtual
+python -m venv venv
+# En Windows:
+venv\Scripts\activate
+# En macOS/Linux:
+source venv/bin/activate
+
+# 3. Instalar dependencias
+pip install -r requirements.txt
+
+# 4. Iniciar el servidor
+uvicorn main:app --reload
+```
+El backend estará disponible en `http://localhost:8000`
+
+### 3. Configurar el Frontend
+```bash
+# 1. Navegar al directorio del frontend
+cd frontend
+
+# 2. Instalar dependencias
+npm install
+
+# 3. Crear archivo .env
+echo "REACT_APP_API_URL=http://localhost:8000" > .env
+
+# 4. Iniciar el servidor de desarrollo
+npm start
+```
+El frontend estará disponible en `http://localhost:3000`
+
+## 📁 Estructura del Proyecto
+
 ```
 backend/
 ├── __init__.py
@@ -22,38 +84,6 @@ backend/
 ├── models.py      # Modelos SQLAlchemy
 ├── schemas.py     # Esquemas Pydantic para validación
 └── main.py        # Aplicación FastAPI con endpoints
-```
-
-## Requisitos
-- Python 3.7+
-- FastAPI
-- SQLAlchemy
-- Pydantic
-- Uvicorn (servidor ASGI)
-
-## Instalación
-
-1. Instalar dependencias:
-```bash
-pip install -r requirements.txt
-```
-
-Esto instalará todas las dependencias necesarias:
-- fastapi>=0.68.0,<0.69.0
-- sqlalchemy>=1.4.0,<1.5.0
-- pydantic>=1.8.0,<1.9.0
-- uvicorn>=0.15.0,<0.16.0
-- python-dotenv>=0.19.0,<0.20.0
-- email-validator>=1.1.0,<1.2.0
-
-2. Ejecutar el servidor:
-```bash
-uvicorn backend.main:app --reload
-```
-
-3. Acceder a la documentación de la API:
-```
-http://localhost:8000/docs
 ```
 
 ## Endpoints de la API
@@ -98,7 +128,7 @@ El sistema utiliza autenticación basada en JWT (JSON Web Tokens) para proteger 
 ### Flujo de Autenticación
 
 1. **Registro de Usuario**:
-   - Eviar una solicnitud POST a `/auth/register` con nombre, email y contraseña
+   - Enviar una solicitud POST a `/auth/register` con nombre, email y contraseña
    - El sistema crea el usuario y devuelve sus datos (sin la contraseña)
 
 2. **Inicio de Sesión**:
@@ -111,7 +141,6 @@ El sistema utiliza autenticación basada en JWT (JSON Web Tokens) para proteger 
 
 ### Ejemplos de Uso
 
-
 ## Acceder a la documentación
 
 La forma más sencilla de explorar la API es a través de la documentación interactiva de Swagger UI:
@@ -120,7 +149,73 @@ La forma más sencilla de explorar la API es a través de la documentación inte
 http://localhost:8000/docs
 ```
 
-Para autenticarte en la documentación interactiva:
-1. Haz clic en el botón "Authorize" en la parte superior derecha
-2. Introduce tus credenciales o el token JWT
-3. Una vez autenticado, podrás probar todos los endpoints protegidos
+# FRONTEND
+
+Este es el frontend de la aplicación de gestión de citas, desarrollado con React y Material UI.
+
+## Requisitos
+
+- Node.js (versión 14 o superior)
+- npm (incluido con Node.js)
+
+## Instalación
+
+1. Clonar el repositorio:
+```bash
+git clone <url-del-repositorio>
+cd frontend
+```
+
+2. Instalar las dependencias:
+```bash
+npm install
+```
+
+3. Crear el archivo `.env`:
+```
+REACT_APP_API_URL=http://localhost:8000
+```
+
+## Desarrollo
+
+Para iniciar el servidor de desarrollo:
+
+```bash
+npm start
+```
+
+La aplicación estará disponible en `http://localhost:3000`.
+
+## Construcción
+
+Para crear una versión de producción:
+
+```bash
+npm run build
+```
+
+Los archivos de producción se generarán en la carpeta `build`.
+
+## Tecnologías Utilizadas
+
+- React
+- TypeScript
+- Material UI
+- React Router
+- Formik
+- Yup
+- Axios
+- date-fns
+
+## Estructura del Proyecto
+
+```
+src/
+  ├── components/     # Componentes reutilizables
+  ├── contexts/      # Contextos de React
+  ├── pages/         # Páginas de la aplicación
+  ├── services/      # Servicios para comunicación con el backend
+  ├── types/         # Definiciones de tipos TypeScript
+  ├── App.tsx        # Componente principal
+  └── index.tsx      # Punto de entrada
+```

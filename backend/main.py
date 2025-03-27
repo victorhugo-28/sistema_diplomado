@@ -2,6 +2,7 @@ from fastapi import FastAPI, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
 from typing import List, Optional
 from datetime import datetime, timedelta
+from fastapi.middleware.cors import CORSMiddleware
 
 from . import models, schemas
 from .database import engine, get_db
@@ -14,6 +15,17 @@ models.Base.metadata.create_all(bind=engine)
 app = FastAPI(title="Sistema de Gestión de Citas", 
               description="API para gestionar citas de clientes",
               version="1.0.0")
+# Configurar CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+    expose_headers=["*"],
+    max_age=3600,
+)
+
 
 # Incluir el router de autenticación
 app.include_router(auth_router.router)
