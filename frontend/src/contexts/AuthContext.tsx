@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { authService } from '../services/authService';
-import { User, LoginResponse, RegisterResponse } from '../types';
+import { User } from '../types';
 
 interface AuthContextType {
   user: User | null;
@@ -15,17 +15,33 @@ export const AuthContext = createContext<AuthContextType | undefined>(undefined)
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const checkAuth = async () => {
-      const currentUser = await authService.getCurrentUser();
-      if (currentUser) {
-        setUser(currentUser);
-        setIsAuthenticated(true);
+    const initializeAuth = async () => {
+      const token = localStorage.getItem('token');
+      if (token) {
+        try {
+          const currentUser = await authService.getCurrentUser();
+          if (currentUser) {
+            setUser(currentUser);
+            setIsAuthenticated(true);
+          }
+        } catch (error) {
+          localStorage.removeItem('token');
+          setUser(null);
+          setIsAuthenticated(false);
+        }
       }
+      setIsLoading(false);
     };
-    checkAuth();
+
+    initializeAuth();
   }, []);
+
+  if (isLoading) {
+    return <div>Cargando...</div>;
+  }
 
   const login = async (email: string, password: string) => {
     try {
