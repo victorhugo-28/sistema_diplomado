@@ -36,7 +36,7 @@ Sistema web para la gestión de citas médicas desarrollado con FastAPI (Backend
 ### 1. Clonar el Repositorio
 ```bash
 git clone <url-del-repositorio>
-cd sistema-gestion-citas
+cd GestionDeCitas
 ```
 
 ### 2. Configurar el Backend
@@ -148,53 +148,6 @@ La forma más sencilla de explorar la API es a través de la documentación inte
 ```
 http://localhost:8000/docs
 ```
-
-# FRONTEND
-
-Este es el frontend de la aplicación de gestión de citas, desarrollado con React y Material UI.
-
-## Requisitos
-
-- Node.js (versión 14 o superior)
-- npm (incluido con Node.js)
-
-## Instalación
-
-1. Clonar el repositorio:
-```bash
-git clone <url-del-repositorio>
-cd frontend
-```
-
-2. Instalar las dependencias:
-```bash
-npm install
-```
-
-3. Crear el archivo `.env`:
-```
-REACT_APP_API_URL=http://localhost:8000
-```
-
-## Desarrollo
-
-Para iniciar el servidor de desarrollo:
-
-```bash
-npm start
-```
-
-La aplicación estará disponible en `http://localhost:3000`.
-
-## Construcción
-
-Para crear una versión de producción:
-
-```bash
-npm run build
-```
-
-Los archivos de producción se generarán en la carpeta `build`.
 
 ## Tecnologías Utilizadas
 
