@@ -36,7 +36,7 @@ Sistema web para la gestión de citas médicas desarrollado con FastAPI (Backend
 ### 1. Clonar el Repositorio
 ```bash
 git clone <url-del-repositorio>
-cd sistema-gestion-citas
+cd GestionDeCitas
 ```
 
 ### 2. Configurar el Backend
