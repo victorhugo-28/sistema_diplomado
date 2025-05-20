@@ -1,8 +1,6 @@
-# init_db.py
-
 import asyncio
 from database import engine, Base
-import models  # ¡importa esto para registrar DoctorModel!
+import models  
 
 async def init():
     async with engine.begin() as conn:

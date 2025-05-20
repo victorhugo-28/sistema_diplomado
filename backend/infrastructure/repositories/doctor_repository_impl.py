@@ -16,6 +16,7 @@ class DoctorRepository:
             await session.commit()
             return doctor
     # Get all doctors
+    
     async def get_all(self):
         async with SessionLocal() as session:
             result = await session.execute(select(DoctorModel))
