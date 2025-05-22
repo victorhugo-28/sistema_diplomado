@@ -8,5 +8,5 @@ class EliminarUsuarioHandler:
     def handle(self, id: int):
         eliminado = self.repo.eliminar(id)
         if not eliminado:
-            raise ValueError("Usuario no encontrado")
-        return {"mensaje": "Usuario eliminado correctamente"}
+            raise ValueError("no encontrado")
+        return {"mensaje": "Usuario eliminado"}
