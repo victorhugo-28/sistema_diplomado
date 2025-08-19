@@ -1,5 +1,6 @@
-from sqlalchemy import Column, Integer, String
+from sqlalchemy.orm import relationship
 from infrastructure.data.AppDbContext import Base
+from sqlalchemy import Column, Integer, String
 
 class Proveedor(Base):
     __tablename__ = "proveedores"
@@ -8,3 +9,5 @@ class Proveedor(Base):
     nombre = Column(String)
     contacto = Column(String)
     direccion = Column(String)
+
+    articulos = relationship("Articulo")

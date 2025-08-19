@@ -15,7 +15,7 @@ class ProveedorController extends Controller
             "direccion" => $request->input('direccion')
         ];
 
-        $ch = curl_init('https://36482cdcb6d0.ngrok-free.app/proveedores');
+        $ch = curl_init('https://3d2ab82f1074.ngrok-free.app/proveedores');
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
         curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
@@ -32,7 +32,7 @@ class ProveedorController extends Controller
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://36482cdcb6d0.ngrok-free.app/proveedores',
+            CURLOPT_URL => 'https://3d2ab82f1074.ngrok-free.app/proveedores',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -47,11 +47,18 @@ class ProveedorController extends Controller
 
         $proveedores = json_decode($response, true);
         
-        return view('proveedor', compact('proveedores'));
+        return view('proveedores.proveedor', compact('proveedores'));
     }
 
     public function editar(Request $request, $id)
     {
+        // Validar los datos de entrada
+        $request->validate([
+            'nombre' => 'required|string|max:255',
+            'contacto' => 'required|string|max:255',
+            'direccion' => 'required|string|max:500'
+        ]);
+
         $data = [
             "id" => (int) $id,
             "nombre" => $request->input('nombre'),
@@ -62,7 +69,7 @@ class ProveedorController extends Controller
         $ch = curl_init();
 
         curl_setopt_array($ch, [
-            CURLOPT_URL => "https://36482cdcb6d0.ngrok-free.app/proveedores/$id",
+            CURLOPT_URL => "https://3d2ab82f1074.ngrok-free.app/proveedores/$id",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -81,7 +88,7 @@ class ProveedorController extends Controller
         curl_close($ch);
 
         if ($httpCode === 200 || $httpCode === 204) {
-            return view('actualizado');
+            return redirect()->route('proveedores.mostrar')->with('mensaje', 'Proveedor actualizado correctamente.');
         } else {
             return back()->with('error', 'Error al actualizar el proveedor. Código: ' . $httpCode . ' | Respuesta: ' . $response);
         }

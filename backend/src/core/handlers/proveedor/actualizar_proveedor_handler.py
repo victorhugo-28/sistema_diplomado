@@ -1,14 +1,11 @@
-from core.dto.proveedor_dto import ActualizarProveedorDTO
-from core.models.proveedor import Proveedor
+# core/handlers/proveedor/actualizar_proveedor_handler.py
 from core.interfaces.proveedor_repository import ProveedorRepositoryInterface
-
+from core.dto.proveedor_dto import ActualizarProveedorDTO
 
 class ActualizarProveedorHandler:
     def __init__(self, repo: ProveedorRepositoryInterface):
         self.repo = repo
 
     def handle(self, id: int, data: ActualizarProveedorDTO):
-        datos = self.repo.actualizar(id, data.nombre, data.contacto, data.direccion)
-        if not datos:
-            return {"error": "No se pudo actualizar el proveedor"}
-        return {"mensaje": "Proveedor actualizado con éxito"}
+        # PUT: requiere los 3 campos
+        return self.repo.actualizar(id, data.nombre, data.contacto, data.direccion)

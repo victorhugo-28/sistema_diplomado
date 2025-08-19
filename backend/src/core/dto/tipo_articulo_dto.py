@@ -9,3 +9,6 @@ class ListarTipoArticuloDTO(BaseModel):
 
 class ActualizarTipoArticuloDTO(BaseModel):
     nombre: str
+
+    class Config:
+        json_schema_extra = {"example": {"nombre": "Accesorios"}}

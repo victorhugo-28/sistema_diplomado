@@ -1,15 +1,22 @@
 from fastapi import FastAPI
 from salon_api.endpoints.Usuario import List, Create, Update, Delete
-from salon_api.endpoints.Cita import List as CitaList, Create as CitaCreate
 from fastapi.middleware.cors import CORSMiddleware
 from salon_api.endpoints.Proveedor import List as ProveedorList, Create as ProveedorCreate, Update as ProveedorUpdate, Delete as ProveedorDelete
 from salon_api.endpoints.TipoArticulo import List as TipoArticuloList, Create as TipoArticuloCreate, Update as TipoArticuloUpdate, Delete as TipoArticuloDelete
-from salon_api.endpoints.Articulo import List as ArticuloList, Create as ArticuloCreate, Update as ArticuloUpdate, Delete as ArticuloDelete
+from salon_api.endpoints.Articulo import List as ArticuloList, Create as ArticuloCreate, Update as ArticuloUpdate, Delete as ArticuloDelete, GetById as ArticuloGetById
 from salon_api.endpoints.Rol import List as RolList, Create as RolCreate, Update as RolUpdate, Delete as RolDelete
 from salon_api.endpoints.Compra import List as CompraList, Create as CompraCreate, Update as CompraUpdate, Delete as CompraDelete
 from salon_api.endpoints.Cliente import List as ClienteList, Create as ClienteCreate, Update as ClienteUpdate, Delete as ClienteDelete
-from salon_api.endpoints.Venta import List as VentaList, Create as VentaCreate, Update as VentaUpdate, Delete as VentaDelete
+from salon_api.endpoints.Venta import List as VentaList, Create as VentaCreate, Update as VentaUpdate, Delete as VentaDelete, GetById as VentaGetById
+from fastapi.staticfiles import StaticFiles
+from fastapi.middleware.cors import CORSMiddleware
+from pathlib import Path
+
 app = FastAPI()
+
+ABS_UPLOADS = Path(r"E:\diplomado\GestionDeCitas\backend\src\uploads")
+ABS_UPLOADS.mkdir(parents=True, exist_ok=True)
+app.mount("/uploads", StaticFiles(directory=str(ABS_UPLOADS)), name="uploads")
 
 #se incluyen los endpoints para usuario
 app.include_router(List.router)
@@ -19,6 +26,7 @@ app.include_router(Delete.router)
 #se incluyen los endpoints para citas
 #app.include_router(CitaList.router)
 #app.include_router(CitaCreate.router)  
+
 
 #se incluyen los endpoints para roles
 app.include_router(RolList.router)
@@ -43,6 +51,7 @@ app.include_router(ArticuloList.router)
 app.include_router(ArticuloCreate.router)
 app.include_router(ArticuloUpdate.router)
 app.include_router(ArticuloDelete.router)
+app.include_router(ArticuloGetById.router)
 
 #se incluyen los endpoints para compras
 app.include_router(CompraList.router)
@@ -61,6 +70,7 @@ app.include_router(VentaList.router)
 app.include_router(VentaCreate.router)
 app.include_router(VentaUpdate.router)
 app.include_router(VentaDelete.router)
+app.include_router(VentaGetById.router)
 # Configuración de CORS
 app.add_middleware(
     CORSMiddleware,

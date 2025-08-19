@@ -1,15 +1,12 @@
+# salon_api/endpoints/compra/Create.py
 from fastapi import APIRouter
-from core.dto.compra_dto import CrearCompraDTO
+from core.dto.compra_dto import CrearCompraDTO, CompraOut
 from core.handlers.compra.crear_compra_handler import CrearCompraHandler
-from infrastructure.data.compra_repository_impl import CompraRepositoryImpl
 
 router = APIRouter()
 
-@router.post("/compras")
+@router.post("/compras", response_model=CompraOut)
 def crear_compra(data: CrearCompraDTO):
-    handler = CrearCompraHandler(CompraRepositoryImpl())
+    handler = CrearCompraHandler()
     compra = handler.handle(data)
-    return {
-        "id": compra.idingreso,
-        "total": compra.ingresototal_compra
-    }
+    return compra

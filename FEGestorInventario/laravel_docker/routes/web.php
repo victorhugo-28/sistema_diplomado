@@ -20,12 +20,13 @@ Route::put('/clientes/{id}', [ClienteController::class, 'editar'])->name('client
 Route::get('/articulos', [ArticulosController::class, 'mostrar'])->name('articulos.mostrar');
 Route::post('/articulos/crear', [ArticulosController::class, 'store'])->name('articulos.store');
 Route::put('/articulos/{id}', [ArticulosController::class, 'editar'])->name('articulos.editar');
-
+Route::get('/articulos/{id}', [ArticulosController::class, 'show']);
 
 // ingresos
 Route::get('/ingresos', [IngresosController::class, 'mostrar'])->name('ingresos.mostrar');
 Route::post('/ingresos/crear', [IngresosController::class, 'store'])->name('ingresos.store');
 Route::put('/ingresos/{id}', [IngresosController::class, 'editar'])->name('ingresos.editar');
+
 
 
 //proveedores
@@ -42,4 +43,3 @@ Route::put('/tipos-articulo/{id}', [TipoarticuloController::class, 'editar'])->n
 //ventas
 Route::get('/ventas', [VentasController::class, 'mostrar'])->name('ventas.mostrar');
 Route::post('/ventas/crear', [VentasController::class, 'store'])->name('ventas.store');
-Route::put('/ventas/{id}', [VentasController::class, 'editar'])->name('ventas.editar');
