@@ -1,6 +1,6 @@
-# 🏥 Sistema de Gestión de Citas con Inventario
+# 📦 Sistema de Gestión de Inventario
 
-Sistema completo de gestión de citas médicas con módulo de inventario desarrollado con **FastAPI** (backend) y **Laravel** (frontend).
+Sistema completo de gestión de inventario y control de stock desarrollado con **FastAPI** (backend) y **Laravel** (frontend).
 
 ## 📋 Índice
 
@@ -19,16 +19,19 @@ Sistema completo de gestión de citas médicas con módulo de inventario desarro
 
 ## ✨ Características
 
-### 🏥 Gestión de Citas
-- Administración de usuarios y roles
-- Gestión de clientes
-- Sistema de citas médicas
+### 📦 Gestión de Inventario
+- **Control de artículos** y categorización por tipos
+- **Gestión de proveedores** y relaciones comerciales
+- **Registro de compras** y control de costos
+- **Gestión de ventas** y control de ingresos
+- **Control de stock** en tiempo real
+- **Gestión de clientes** para registro de ventas
 
-### 📦 Módulo de Inventario
-- Gestión de artículos y tipos de artículos
-- Control de proveedores
-- Registro de compras y ventas
-- Control de stock en tiempo real
+### 🎯 Características del Sistema
+- **API REST completa** con documentación automática
+- **Interfaz web intuitiva** desarrollada en Laravel
+- **Base de datos SQLite** para fácil despliegue
+- **Arquitectura escalable** y mantenible
 
 ### 🧪 Calidad de Software
 - **26 pruebas unitarias** con 100% de cobertura
@@ -39,7 +42,7 @@ Sistema completo de gestión de citas médicas con módulo de inventario desarro
 ## 🏗️ Arquitectura
 
 ```
-Sistema de Gestión de Citas
+Sistema de Gestión de Inventario
 ├── Backend (FastAPI + SQLAlchemy)
 │   ├── Endpoints (Controllers)
 │   ├── Handlers (Business Logic)
@@ -86,8 +89,8 @@ Sistema de Gestión de Citas
 
 1. **Clonar el repositorio**
 ```bash
-git clone https://github.com/tu-usuario/GestionDeCitas.git
-cd GestionDeCitas
+git clone https://github.com/tu-usuario/GestionDeInventario.git
+cd GestionDeInventario
 ```
 
 2. **Crear entorno virtual**
@@ -111,7 +114,7 @@ pip install python-multipart
 
 **Windows:**
 ```python
-SQLALCHEMY_DATABASE_URL = "sqlite:///E:/diplomado/GestionDeCitas/backend/src/db/test.db"
+SQLALCHEMY_DATABASE_URL = "sqlite:///E:/diplomado/GestionDeInventario/backend/src/db/test.db"
 ```
 
 **macOS/Linux:**
@@ -147,8 +150,8 @@ uvicorn salon_api.main:app --reload
 
 1. **Clonar el repositorio**
 ```bash
-git clone https://github.com/tu-usuario/GestionDeCitas.git
-cd GestionDeCitas
+git clone https://github.com/tu-usuario/GestionDeInventario.git
+cd GestionDeInventario
 ```
 
 2. **Crear entorno virtual**
@@ -263,7 +266,7 @@ php artisan serve
 
 ### Rutas de Base de Datos por Sistema Operativo
 
-- **Windows**: `sqlite:///E:/diplomado/GestionDeCitas/backend/src/db/test.db`
+- **Windows**: `sqlite:///E:/diplomado/GestionDeInventario/backend/src/db/test.db`
 - **macOS/Linux**: `sqlite:////Users/tu-usuario/proyecto/backend/src/db/test.db`
 
 > 💡 **Tip**: Edita `src/infrastructure/data/AppDbContext.py` con la ruta absoluta correcta de tu sistema antes de inicializar.
@@ -325,7 +328,7 @@ python diagnostico_bd.py
 ## 📁 Estructura del Proyecto
 
 ```
-GestionDeCitas/
+GestionDeInventario/
 ├── backend/
 │   └── src/
 │       ├── db/
